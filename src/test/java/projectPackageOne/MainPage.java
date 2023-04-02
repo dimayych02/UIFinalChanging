@@ -53,7 +53,6 @@ public class MainPage {
     public MainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
-
     }
 
 
@@ -66,13 +65,13 @@ public class MainPage {
     }
 
 
-    public void successAddingCustomer(String firstname, String LastName, String PostalCode) {
+    public void successAddingCustomer(String firstname, String lastName, String postalCode) {
         buttonAddCustomer = driverWait.waitForElementClickable(buttonAddCustomer, 5);
         buttonAddCustomer.click();
         firstNameField = driverWait.waitForElementClickable(firstNameField, 5);
         firstNameField.sendKeys(firstname);
-        lastNameField.sendKeys(LastName);
-        postCodeField.sendKeys(PostalCode);
+        lastNameField.sendKeys(lastName);
+        postCodeField.sendKeys(postalCode);
         addCustomer.click();
     }
 
@@ -96,13 +95,13 @@ public class MainPage {
         buttonDelete.click();
     }
 
-    public void createDuplicateUser(String firstname, String LastName, String PostalCode) {
+    public void createDuplicateUser(String firstname, String lastName, String postalCode) {
         buttonAddCustomer = driverWait.waitForElementClickable(buttonAddCustomer, 5);
         buttonAddCustomer.click();
         firstNameField = driverWait.waitForElementClickable(firstNameField, 5);
         firstNameField.sendKeys(firstname);
-        lastNameField.sendKeys(LastName);
-        postCodeField.sendKeys(PostalCode);
+        lastNameField.sendKeys(lastName);
+        postCodeField.sendKeys(postalCode);
         addCustomer.click();
     }
 
