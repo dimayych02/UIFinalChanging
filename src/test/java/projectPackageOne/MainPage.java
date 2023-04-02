@@ -136,8 +136,9 @@ public class MainPage {
     }
 
 
-    public void closeAlert() {
+    public MainPage closeAlert() {
         driver.switchTo().alert().accept();
+        return this;
     }
 
 
