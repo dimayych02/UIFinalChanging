@@ -15,42 +15,31 @@ import java.util.stream.Collectors;
 public class MainPage {
     public static DriverWait driverWait;
     public static WebDriver driver;
-
     private List<String> expectedResult;
-
     private List<String> actualResult;
-
     private List<String> expectedResultUser;
-
     private List<String> actualResultUser;
 
     @FindBy(xpath = "//*[contains(text(),'Add Customer')]")
     private WebElement buttonAddCustomer;
 
-
     @FindBy(css = "input[placeholder=\"First Name\"]")
     private WebElement firstNameField;
-
 
     @FindBy(css = "input[placeholder=\"Last Name\"]")
     private WebElement lastNameField;
 
-
     @FindBy(css = "input[placeholder=\"Post Code\"]")
     private WebElement postCodeField;
-
 
     @FindBy(xpath = "//button[text()='Add Customer']")
     private WebElement addCustomer;
 
-
     @FindBy(xpath = "//*[contains(text(),'Customers')]")
     private WebElement buttonCustomers;
 
-
     @FindBy(xpath = "//*[contains(text(),'First Name')]")
     private WebElement sortedByButtonFirstName;
-
 
     @FindBy(xpath = "//tr//td[@class][1]")
     private List<WebElement> listOfCustomers;
