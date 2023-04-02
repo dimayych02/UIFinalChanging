@@ -1,4 +1,4 @@
-package projectPackage;
+package projectPackageOne;
 
 import java.io.FileInputStream;
 import java.io.IOException;
