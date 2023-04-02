@@ -65,11 +65,11 @@ public class MainPage {
     }
 
 
-    public void successAddingCustomer(String firstname, String lastName, String postalCode) {
+    public void successAddingCustomer(String firstName, String lastName, String postalCode) {
         buttonAddCustomer = driverWait.waitForElementClickable(buttonAddCustomer, 5);
         buttonAddCustomer.click();
         firstNameField = driverWait.waitForElementClickable(firstNameField, 5);
-        firstNameField.sendKeys(firstname);
+        firstNameField.sendKeys(firstName);
         lastNameField.sendKeys(lastName);
         postCodeField.sendKeys(postalCode);
         addCustomer.click();
@@ -95,11 +95,11 @@ public class MainPage {
         buttonDelete.click();
     }
 
-    public void createDuplicateUser(String firstname, String lastName, String postalCode) {
+    public void createDuplicateUser(String firstName, String lastName, String postalCode) {
         buttonAddCustomer = driverWait.waitForElementClickable(buttonAddCustomer, 5);
         buttonAddCustomer.click();
         firstNameField = driverWait.waitForElementClickable(firstNameField, 5);
-        firstNameField.sendKeys(firstname);
+        firstNameField.sendKeys(firstName);
         lastNameField.sendKeys(lastName);
         postCodeField.sendKeys(postalCode);
         addCustomer.click();
