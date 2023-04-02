@@ -111,6 +111,17 @@ public class MainPage {
         return this;
     }
 
+    public MainPage createUserWithEmptyParams() {
+        buttonAddCustomer = driverWait.waitForElementClickable(buttonAddCustomer, 5);
+        buttonAddCustomer.click();
+        firstNameField = driverWait.waitForElementClickable(firstNameField, 5);
+        firstNameField.sendKeys(" ");
+        lastNameField.sendKeys(" ");
+        postCodeField.sendKeys(" ");
+        addCustomer.click();
+        return this;
+    }
+
 
     public MainPage alphabetSorting() {
         buttonCustomers = driverWait.waitForElementClickable(buttonCustomers, 5);
@@ -167,4 +178,8 @@ public class MainPage {
         return driver.switchTo().alert().getText();
     }
 
+    public boolean checkEmptyUser() {
+        return listOfCustomers.stream().map(x -> x.getText()).
+                filter(x -> x.contains(" ")).collect(Collectors.toList()).isEmpty();
+    }
 }

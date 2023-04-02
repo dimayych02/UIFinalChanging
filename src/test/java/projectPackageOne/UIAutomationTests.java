@@ -45,7 +45,7 @@ public class UIAutomationTests {
         Assert.assertFalse(mainPage.CheckThatUserDeleted());
     }
 
-    @Description("создание дубликата")
+    @Description("Создание дубликата")
     @Severity(SeverityLevel.CRITICAL)
     @Test(priority = 3, retryAnalyzer = TestNGRetry.class)
     public void createDuplicate() {
@@ -55,6 +55,20 @@ public class UIAutomationTests {
                 ConfProperties.getProperty("DuplicatePostalCode"));
         Assert.assertEquals(ConfProperties.getProperty("DuplicateAlertMessage"), mainPage.getAlertText());
         mainPage.closeAlert();
+    }
+
+    @Description("Создание пользователя с пустыми параметрами")
+    @Severity(SeverityLevel.TRIVIAL)
+    @Test(priority =6, retryAnalyzer = TestNGRetry.class)
+    public void emptyUser() {
+        mainPage.openPage();
+        mainPage.createUserWithEmptyParams();
+        Assert.assertEquals(ConfProperties.getProperty("DuplicateAlertMessage"), mainPage.getAlertText());
+        mainPage.closeAlert();
+        Assert.assertTrue(mainPage.checkEmptyUser());
+        /**
+         *  баг,так как не существует пользователя с пустыми параметрами
+         */
     }
 
     @Description("Сортировка пользователей в алфавмитном порядке")

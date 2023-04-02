@@ -5,7 +5,7 @@
     <test name="AllTests" >
 
         <classes>
-            <class name="projectPackage.UIAutomationTests">
+            <class name="projectPackageOne.UIAutomationTests">
 
             </class>
         </classes>
