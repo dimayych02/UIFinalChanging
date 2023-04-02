@@ -14,14 +14,14 @@ public class UIAutomationTests  {
 
 
     @BeforeMethod
-    public void SetUp() {
+    public void setUp() {
         driver = new ChromeDriver();
         mainPage = new MainPage(driver);
         mainPage.configurationWait();
     }
 
     @Test(priority = 1,retryAnalyzer = TestNGRetry.class)
-    public void SuccessAddUser() {
+    public void successAddUser() {
         mainPage.openPage();
         mainPage.successAddingCustomer(ConfProperties.getProperty("FirstName"),
                 ConfProperties.getProperty("LastName"),
@@ -33,7 +33,7 @@ public class UIAutomationTests  {
 
 
     @Test(priority = 2,retryAnalyzer = TestNGRetry.class)
-    public void DeleteUser() {
+    public void deleteUser() {
         mainPage.openPage();
         mainPage.removeCreatingUser(ConfProperties.getProperty("DeleteFirstName"));
         Assert.assertFalse(mainPage.CheckThatUserDeleted());
@@ -50,14 +50,14 @@ public class UIAutomationTests  {
     }
 
     @Test(priority = 4,retryAnalyzer = TestNGRetry.class)
-    public void CheckSorting() {
+    public void checkSorting() {
         mainPage.openPage();
         mainPage.alphabetSorting();
         Assert.assertEquals(mainPage.CheckExpectedSorting(), mainPage.CheckActualSorting());
     }
 
     @Test(priority = 5,retryAnalyzer = TestNGRetry.class)
-    public void CheckReverseSorting() {
+    public void checkReverseSorting() {
         mainPage.openPage();
         mainPage.reverseAlphabetSorting();
         Assert.assertEquals(mainPage.CheckExpectedSorting(), mainPage.CheckActualSorting());

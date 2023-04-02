@@ -56,8 +56,9 @@ public class MainPage {
     }
 
 
-    public void configurationWait() {
+    public MainPage configurationWait() {
         driverWait = new DriverWait();
+        return this;
     }
 
     public MainPage openPage() {
