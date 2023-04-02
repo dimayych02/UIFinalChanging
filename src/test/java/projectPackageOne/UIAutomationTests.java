@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 
-public class UIAutomationTests {
+public class UIAutomationTests  {
 
     public static MainPage mainPage;
     public static WebDriver driver;
@@ -20,7 +20,7 @@ public class UIAutomationTests {
         mainPage.configurationWait();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1,retryAnalyzer = TestNGRetry.class)
     public void SuccessAddUser() {
         mainPage.openPage();
         mainPage.successAddingCustomer(ConfProperties.getProperty("FirstName"),
@@ -32,14 +32,14 @@ public class UIAutomationTests {
     }
 
 
-    @Test(priority = 2)
+    @Test(priority = 2,retryAnalyzer = TestNGRetry.class)
     public void DeleteUser() {
         mainPage.openPage();
         mainPage.removeCreatingUser(ConfProperties.getProperty("DeleteFirstName"));
         Assert.assertFalse(mainPage.CheckThatUserDeleted());
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3,retryAnalyzer = TestNGRetry.class)
     public void createDuplicate() {
         mainPage.openPage();
         mainPage.createDuplicateUser(ConfProperties.getProperty("DuplicateFirstName"),
@@ -49,14 +49,14 @@ public class UIAutomationTests {
         mainPage.closeAlert();
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4,retryAnalyzer = TestNGRetry.class)
     public void CheckSorting() {
         mainPage.openPage();
         mainPage.alphabetSorting();
         Assert.assertEquals(mainPage.CheckExpectedSorting(), mainPage.CheckActualSorting());
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5,retryAnalyzer = TestNGRetry.class)
     public void CheckReverseSorting() {
         mainPage.openPage();
         mainPage.reverseAlphabetSorting();

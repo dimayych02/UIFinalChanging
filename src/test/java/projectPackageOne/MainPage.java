@@ -60,12 +60,13 @@ public class MainPage {
         driverWait = new DriverWait();
     }
 
-    public void openPage() {
+    public MainPage openPage() {
         driver.get(ConfProperties.getProperty("url"));
+        return this;
     }
 
 
-    public void successAddingCustomer(String firstName, String lastName, String postalCode) {
+    public MainPage successAddingCustomer(String firstName, String lastName, String postalCode) {
         buttonAddCustomer = driverWait.waitForElementClickable(buttonAddCustomer, 5);
         buttonAddCustomer.click();
         firstNameField = driverWait.waitForElementClickable(firstNameField, 5);
@@ -73,10 +74,11 @@ public class MainPage {
         lastNameField.sendKeys(lastName);
         postCodeField.sendKeys(postalCode);
         addCustomer.click();
+        return this;
     }
 
 
-    public void findAddingUser(String user) {
+    public MainPage findAddingUser(String user) {
         buttonCustomers = driverWait.waitForElementClickable(buttonCustomers, 5);
         buttonCustomers.click();
         searchCustomer = driverWait.waitForElementClickable(searchCustomer, 5);
@@ -85,17 +87,19 @@ public class MainPage {
                 filter(y -> y.contains(ConfProperties.getProperty("FirstName"))).collect(Collectors.toList());
         expectedResultUser = new ArrayList<>();
         expectedResultUser.add(ConfProperties.getProperty("FirstName"));
+        return this;
     }
 
-    public void removeCreatingUser(String user) {
+    public MainPage removeCreatingUser(String user) {
         buttonCustomers = driverWait.waitForElementClickable(buttonCustomers, 5);
         buttonCustomers.click();
         searchCustomer = driverWait.waitForElementClickable(searchCustomer, 5);
         searchCustomer.sendKeys(user);
         buttonDelete.click();
+        return this;
     }
 
-    public void createDuplicateUser(String firstName, String lastName, String postalCode) {
+    public MainPage createDuplicateUser(String firstName, String lastName, String postalCode) {
         buttonAddCustomer = driverWait.waitForElementClickable(buttonAddCustomer, 5);
         buttonAddCustomer.click();
         firstNameField = driverWait.waitForElementClickable(firstNameField, 5);
@@ -103,10 +107,11 @@ public class MainPage {
         lastNameField.sendKeys(lastName);
         postCodeField.sendKeys(postalCode);
         addCustomer.click();
+        return this;
     }
 
 
-    public void alphabetSorting() {
+    public MainPage alphabetSorting() {
         buttonCustomers = driverWait.waitForElementClickable(buttonCustomers, 5);
         buttonCustomers.click();
         sortedByButtonFirstName = driverWait.waitForElementClickable(sortedByButtonFirstName, 5);
@@ -115,16 +120,20 @@ public class MainPage {
         sortedByButtonFirstName.click();
         actualResult = listOfCustomers.stream().map(x -> x.getText()).collect(Collectors.toList());
         expectedResult = listOfCustomers.stream().map(x -> x.getText()).sorted().collect(Collectors.toList());
+        return this;
     }
 
-    public void reverseAlphabetSorting() {
+    public MainPage reverseAlphabetSorting() {
         buttonCustomers = driverWait.waitForElementClickable(buttonCustomers, 5);
         buttonCustomers.click();
         sortedByButtonFirstName = driverWait.waitForElementClickable(sortedByButtonFirstName, 5);
         sortedByButtonFirstName.click();
         actualResult = listOfCustomers.stream().map(x -> x.getText()).collect(Collectors.toList());
-        expectedResult = listOfCustomers.stream().map(x -> x.getText()).sorted(Collections.reverseOrder()).collect(Collectors.toList());
+        expectedResult = listOfCustomers.stream().map(x -> x.getText()).
+                sorted(Collections.reverseOrder()).collect(Collectors.toList());
+        return this;
     }
+
 
     public void closeAlert() {
         driver.switchTo().alert().accept();
