@@ -47,7 +47,7 @@ public class UIAutomationTests {
         mainPage.successAddingCustomer(firstname, lastname, postalCode);
         mainPage.closeAlert();
         mainPage.findAddingUser(firstname);
-        Assert.assertEquals(mainPage.expectedResultUser, mainPage.actualResultUser,
+        Assert.assertEquals(mainPage.expectedResult, mainPage.actualResult,
                 "Пользователь не был создан!");
     }
 
@@ -57,7 +57,8 @@ public class UIAutomationTests {
     public void deleteUser() {
         mainPage.openPage(url);
         mainPage.removeCreatingUser(deleteOrDuplicateUserName);
-        Assert.assertFalse(mainPage.checkThatUserDeleted(deleteOrDuplicateUserName));
+        Assert.assertFalse(mainPage.checkThatUserDeleted(deleteOrDuplicateUserName),
+                "Пользователь не был удален!");
     }
 
     @Description("Создание дубликата")
@@ -81,10 +82,7 @@ public class UIAutomationTests {
         Assert.assertEquals(duplicateAlertWindow, mainPage.getAlertText(),
                 "alert-окно 'Please check the details. Customer may be duplicate' не появилось!");
         mainPage.closeAlert();
-        Assert.assertTrue(mainPage.checkEmptyUser(),"Пользователь с пустыми параметрами блы найден!");
-        /**
-         *  баг,так как не существует пользователя с такими параметрами
-         */
+        Assert.assertTrue(mainPage.checkEmptyUser(), "Пользователь с пустыми параметрами был найден!");
     }
 
     @Description("Пользователь не создан")
@@ -92,7 +90,7 @@ public class UIAutomationTests {
     @Test(priority = 4, retryAnalyzer = TestNGRetry.class)
     public void userIsNotCreated() {
         mainPage.openPage(url);
-        mainPage.invalidCreationOfUser();
+        mainPage.successAddingCustomer("", "", "");
         Assert.assertFalse(mainPage.isAlertPresent());
     }
 

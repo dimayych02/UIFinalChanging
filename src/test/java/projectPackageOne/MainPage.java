@@ -18,8 +18,7 @@ public class MainPage {
     public static WebDriver driver;
     protected List<String> expectedResult;
     protected List<String> actualResult;
-    protected List<String> expectedResultUser;
-    protected List<String> actualResultUser;
+
 
     @FindBy(xpath = "//*[contains(text(),'Add Customer')]")
     private WebElement buttonAddCustomer;
@@ -85,10 +84,10 @@ public class MainPage {
         buttonCustomers.click();
         searchCustomer = driverWait.waitForElementClickable(searchCustomer, 5);
         searchCustomer.sendKeys(user);
-        actualResultUser = listOfCustomers.stream().map(x -> x.getText()).
+        actualResult = listOfCustomers.stream().map(x -> x.getText()).
                 filter(y -> y.contains(user)).collect(Collectors.toList());
-        expectedResultUser = new ArrayList<>();
-        expectedResultUser.add(user);
+        expectedResult = new ArrayList<>();
+        expectedResult.add(user);
         return this;
     }
 
@@ -98,14 +97,6 @@ public class MainPage {
         searchCustomer = driverWait.waitForElementClickable(searchCustomer, 5);
         searchCustomer.sendKeys(user);
         buttonDelete.click();
-        return this;
-    }
-
-    public MainPage invalidCreationOfUser() {
-        buttonAddCustomer = driverWait.waitForElementClickable(buttonAddCustomer, 5);
-        buttonAddCustomer.click();
-        addCustomer = driverWait.waitForElementClickable(addCustomer, 5);
-        addCustomer.click();
         return this;
     }
 
