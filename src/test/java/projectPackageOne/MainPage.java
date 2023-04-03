@@ -84,8 +84,6 @@ public class MainPage {
         buttonCustomers.click();
         searchCustomer = driverWait.waitForElementClickable(searchCustomer, 5);
         searchCustomer.sendKeys(user);
-        actualResult = listOfCustomers.stream().map(x -> x.getText()).
-                filter(y -> y.contains(user)).collect(Collectors.toList());
         expectedResult = new ArrayList<>();
         expectedResult.add(user);
         return this;
@@ -106,10 +104,7 @@ public class MainPage {
         buttonCustomers.click();
         sortedByButtonFirstName = driverWait.waitForElementClickable(sortedByButtonFirstName, 5);
         sortedByButtonFirstName.click();
-        //Сортировка в алфавитном порядке
         sortedByButtonFirstName.click();
-        actualResult = listOfCustomers.stream().map(x -> x.getText()).collect(Collectors.toList());
-        expectedResult = listOfCustomers.stream().map(x -> x.getText()).sorted().collect(Collectors.toList());
         return this;
     }
 
@@ -118,9 +113,6 @@ public class MainPage {
         buttonCustomers.click();
         sortedByButtonFirstName = driverWait.waitForElementClickable(sortedByButtonFirstName, 5);
         sortedByButtonFirstName.click();
-        actualResult = listOfCustomers.stream().map(x -> x.getText()).collect(Collectors.toList());
-        expectedResult = listOfCustomers.stream().map(x -> x.getText()).
-                sorted(Collections.reverseOrder()).collect(Collectors.toList());
         return this;
     }
 
@@ -130,10 +122,13 @@ public class MainPage {
         return this;
     }
 
+    public List<String> getUsersName() {
+        return listOfCustomers.stream().map(x -> x.getText()).collect(Collectors.toList());
+    }
+
 
     public boolean checkThatUserDeleted(String user) {
-        return listOfCustomers.stream().map(x -> x.getText()).collect(Collectors.toList()).
-                contains(user);
+        return getUsersName().contains(user);
     }
 
     public String getAlertText() {
@@ -141,7 +136,7 @@ public class MainPage {
     }
 
     public boolean checkEmptyUser() {
-        return listOfCustomers.stream().map(x -> x.getText()).
+        return getUsersName().stream().
                 filter(x -> x.contains(" ")).collect(Collectors.toList()).isEmpty();
     }
 

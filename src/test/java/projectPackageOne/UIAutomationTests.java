@@ -9,6 +9,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.util.Collections;
+import java.util.stream.Collectors;
+
 
 public class UIAutomationTests {
 
@@ -47,7 +50,9 @@ public class UIAutomationTests {
         mainPage.successAddingCustomer(firstname, lastname, postalCode);
         mainPage.closeAlert();
         mainPage.findAddingUser(firstname);
-        Assert.assertEquals(mainPage.expectedResult, mainPage.actualResult,
+        Assert.assertEquals(mainPage.getUsersName().stream().
+                        filter(y -> y.contains(firstname)).collect(Collectors.toList()),
+                mainPage.expectedResult,
                 "Пользователь не был создан!");
     }
 
@@ -100,7 +105,9 @@ public class UIAutomationTests {
     public void checkSorting() {
         mainPage.openPage(url);
         mainPage.alphabetSorting();
-        Assert.assertEquals(mainPage.expectedResult, mainPage.actualResult,
+        Assert.assertEquals(mainPage.getUsersName().stream()
+                        .sorted().collect(Collectors.toList()),
+                mainPage.getUsersName(),
                 "Сортировка в алафвитном порядке зафейлилась!");
     }
 
@@ -110,7 +117,8 @@ public class UIAutomationTests {
     public void checkReverseSorting() {
         mainPage.openPage(url);
         mainPage.reverseAlphabetSorting();
-        Assert.assertEquals(mainPage.expectedResult, mainPage.actualResult,
+        Assert.assertEquals(mainPage.getUsersName().stream()
+                        .sorted(Collections.reverseOrder()).collect(Collectors.toList()), mainPage.getUsersName(),
                 "Сортировка в обратном порядке зафейлилась!");
     }
 
