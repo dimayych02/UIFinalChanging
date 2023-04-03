@@ -21,7 +21,6 @@ public class UIAutomationTests {
     protected static String deleteOrDuplicateUserName;
     protected static String duplicateLastName;
     protected static String duplicatePostalCode;
-
     protected static String duplicateAlertWindow;
 
 
@@ -49,7 +48,7 @@ public class UIAutomationTests {
         mainPage.closeAlert();
         mainPage.findAddingUser(firstname);
         Assert.assertEquals(mainPage.expectedResultUser, mainPage.actualResultUser,
-                "Expected result does not correspond actual result!");
+                "Пользователь не был создан!");
     }
 
     @Description("Удаление пользователя")
@@ -69,7 +68,7 @@ public class UIAutomationTests {
         mainPage.successAddingCustomer(deleteOrDuplicateUserName, duplicateLastName,
                 duplicatePostalCode);
         Assert.assertEquals(duplicateAlertWindow, mainPage.getAlertText(),
-                "Expected result does not correspond actual result!");
+                "Этот пользователь не является дубликатом!");
         mainPage.closeAlert();
     }
 
@@ -80,9 +79,9 @@ public class UIAutomationTests {
         mainPage.openPage(url);
         mainPage.successAddingCustomer(" ", " ", " ");
         Assert.assertEquals(duplicateAlertWindow, mainPage.getAlertText(),
-                "Expected result does not correspond actual result!");
+                "alert-окно 'Please check the details. Customer may be duplicate' не появилось!");
         mainPage.closeAlert();
-        Assert.assertTrue(mainPage.checkEmptyUser());
+        Assert.assertTrue(mainPage.checkEmptyUser(),"Пользователь с пустыми параметрами блы найден!");
         /**
          *  баг,так как не существует пользователя с такими параметрами
          */
@@ -104,7 +103,7 @@ public class UIAutomationTests {
         mainPage.openPage(url);
         mainPage.alphabetSorting();
         Assert.assertEquals(mainPage.expectedResult, mainPage.actualResult,
-                "Expected result does not correspond actual result!");
+                "Сортировка в алафвитном порядке зафейлилась!");
     }
 
     @Description("Сортировка пользователей в обратном порядке")
@@ -114,7 +113,7 @@ public class UIAutomationTests {
         mainPage.openPage(url);
         mainPage.reverseAlphabetSorting();
         Assert.assertEquals(mainPage.expectedResult, mainPage.actualResult,
-                "Expected result does not correspond actual result!");
+                "Сортировка в обратном порядке зафейлилась!");
     }
 
 
