@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +16,7 @@ public class MainPage {
     public static DriverWait driverWait;
     public static WebDriver driver;
     protected List<String> expectedResult;
-    protected List<String> actualResult;
+ 
 
 
     @FindBy(xpath = "//*[contains(text(),'Add Customer')]")
