@@ -1,6 +1,7 @@
 package projectPackageOne;
 
 
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,10 +16,10 @@ import java.util.stream.Collectors;
 public class MainPage {
     public static DriverWait driverWait;
     public static WebDriver driver;
-    private List<String> expectedResult;
-    private List<String> actualResult;
-    private List<String> expectedResultUser;
-    private List<String> actualResultUser;
+    protected List<String> expectedResult;
+    protected List<String> actualResult;
+    protected List<String> expectedResultUser;
+    protected List<String> actualResultUser;
 
     @FindBy(xpath = "//*[contains(text(),'Add Customer')]")
     private WebElement buttonAddCustomer;
@@ -61,8 +62,8 @@ public class MainPage {
         return this;
     }
 
-    public MainPage openPage() {
-        driver.get(ConfProperties.getProperty("url"));
+    public MainPage openPage(String url) {
+        driver.get(url);
         return this;
     }
 
@@ -85,9 +86,9 @@ public class MainPage {
         searchCustomer = driverWait.waitForElementClickable(searchCustomer, 5);
         searchCustomer.sendKeys(user);
         actualResultUser = listOfCustomers.stream().map(x -> x.getText()).
-                filter(y -> y.contains(ConfProperties.getProperty("FirstName"))).collect(Collectors.toList());
+                filter(y -> y.contains(user)).collect(Collectors.toList());
         expectedResultUser = new ArrayList<>();
-        expectedResultUser.add(ConfProperties.getProperty("FirstName"));
+        expectedResultUser.add(user);
         return this;
     }
 
@@ -100,24 +101,10 @@ public class MainPage {
         return this;
     }
 
-    public MainPage createDuplicateUser(String firstName, String lastName, String postalCode) {
+    public MainPage invalidCreationOfUser() {
         buttonAddCustomer = driverWait.waitForElementClickable(buttonAddCustomer, 5);
         buttonAddCustomer.click();
-        firstNameField = driverWait.waitForElementClickable(firstNameField, 5);
-        firstNameField.sendKeys(firstName);
-        lastNameField.sendKeys(lastName);
-        postCodeField.sendKeys(postalCode);
-        addCustomer.click();
-        return this;
-    }
-
-    public MainPage createUserWithEmptyParams() {
-        buttonAddCustomer = driverWait.waitForElementClickable(buttonAddCustomer, 5);
-        buttonAddCustomer.click();
-        firstNameField = driverWait.waitForElementClickable(firstNameField, 5);
-        firstNameField.sendKeys(" ");
-        lastNameField.sendKeys(" ");
-        postCodeField.sendKeys(" ");
+        addCustomer = driverWait.waitForElementClickable(addCustomer, 5);
         addCustomer.click();
         return this;
     }
@@ -153,25 +140,9 @@ public class MainPage {
     }
 
 
-    public List CheckActualSorting() {
-        return actualResult;
-    }
-
-    public List CheckExpectedSorting() {
-        return expectedResult;
-    }
-
-    public List CheckExpectUser() {
-        return expectedResultUser;
-    }
-
-    public List CheckActualUser() {
-        return actualResultUser;
-    }
-
-    public boolean CheckThatUserDeleted() {
+    public boolean checkThatUserDeleted(String user) {
         return listOfCustomers.stream().map(x -> x.getText()).collect(Collectors.toList()).
-                contains(ConfProperties.getProperty("DeleteFirstName"));
+                contains(user);
     }
 
     public String getAlertText() {
@@ -181,5 +152,14 @@ public class MainPage {
     public boolean checkEmptyUser() {
         return listOfCustomers.stream().map(x -> x.getText()).
                 filter(x -> x.contains(" ")).collect(Collectors.toList()).isEmpty();
+    }
+
+    public boolean isAlertPresent() {
+        try {
+            driver.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException Ex) {
+            return false;
+        }
     }
 }
