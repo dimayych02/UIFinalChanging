@@ -50,9 +50,8 @@ public class UIAutomationTests {
         mainPage.successAddingCustomer(firstname, lastname, postalCode);
         mainPage.closeAlert();
         mainPage.findAddingUser(firstname);
-        Assert.assertEquals(mainPage.getUsersName().stream().
-                        filter(y -> y.contains(firstname)).collect(Collectors.toList()),
-                mainPage.expectedResult,
+        Assert.assertEquals(mainPage.getUsersName().get(0),
+                firstname,
                 "Пользователь не был создан!");
     }
 

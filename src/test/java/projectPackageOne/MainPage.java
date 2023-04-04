@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,8 +15,6 @@ import java.util.stream.Collectors;
 public class MainPage {
     public static DriverWait driverWait;
     public static WebDriver driver;
-    protected List<String> expectedResult;
- 
 
 
     @FindBy(xpath = "//*[contains(text(),'Add Customer')]")
@@ -83,8 +81,6 @@ public class MainPage {
         buttonCustomers.click();
         searchCustomer = driverWait.waitForElementClickable(searchCustomer, 5);
         searchCustomer.sendKeys(user);
-        expectedResult = new ArrayList<>();
-        expectedResult.add(user);
         return this;
     }
 
